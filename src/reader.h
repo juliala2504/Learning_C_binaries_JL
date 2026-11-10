@@ -10,7 +10,7 @@
  * WHO INCLUDES IT?
  *   - reader.c : implements the functions
  *   - main.c   : calls the functions
- * Both use the same description, so there is only one source of truth.
+ * Both use the same description.
  */
 
 

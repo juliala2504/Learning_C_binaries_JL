@@ -29,7 +29,8 @@ int main (void)
 
         Relation rel;
 
-        // The "&rel" gives the function the ADDRESS of the variable, so it can fill in the pointers and the count
+        // The "&rel" gives the function the ADDRESS of the variable, so it can fill in the pointers and the count. The & symbol always defines the address for a pointer
+        // If 'double' is the variable, then 'double*' is its pointer, *pointer' is then the variable where '&var' is the pointer.
 
         if (read_relation("files/The_mass_Mv_data_in_AppA_KTG93.dat", &rel) != 0) {
             /* Something went wrong: stop the program and report an error. */

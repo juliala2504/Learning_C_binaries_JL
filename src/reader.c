@@ -4,9 +4,7 @@
  * ============================================================
  *
  * WHAT IS THIS FILE?
- * reader.h only declares the functions (their signatures). This
- * file contains the bodies: the code that actually opens the files,
- * reads the lines, stores the numbers and frees the memory.
+ * reader.h only declares the functions. This file contains the bodies: the code that actually opens the files, reads the lines, stores the numbers and frees the memory.
  *
  * WHICH HEADERS DO WE NEED?
  *   stdio.h  : file functions (fopen, fgets, sscanf, fclose, rewind)
