@@ -7,7 +7,7 @@
  * It is the entry point: the operating system starts the program
  * at main(). Here we:
  *   1. read the relation file (mass vs. magnitude),
- *   2. read one star cluster file,
+ *   2. read star cluster files,
  *   3. print some information to check that the reading works,
  *   4. free all the memory we reserved.
  *
@@ -23,8 +23,6 @@
 
 int main (void)
 {
-    int main(void) {
-
         // Create a Relation variable on the stack. This is not the data itself, only the container: two pointers (mbol, mass) and a count. The actual arrays are reserved later by read_relation() which returns 0 on success and -1 on error
 
         Relation rel;
@@ -56,23 +54,37 @@ int main (void)
 
 
         /* ============================================================
-         * PART 2: read one star cluster file
+         * PART 2: read star cluster files
          * ============================================================ */
 
-        /* Cluster variable is only the container. The array of stars is reserved inside read_cluster(). */
-        Cluster c;
 
-        if (read_cluster("files/SC100Myr.dat", &c) != 0) {
+        const char *files[] = {
+            "files/SC100Myr.dat",
+            "files/SC200Myr.dat",
+            "files/SC300Myr.dat"
+        };
+
+        /* Go through the three files one by one */
+
+        for (int f = 0; f < 3; f++) {
+
+        /* Cluster variable is only the container. The array of stars is reserved inside read_cluster(). */
+            Cluster c;
+
+
+        if (read_cluster(files[f], &c) != 0) {
             return 1;   /* error: stop the program */
         }
 
-        /* ------------------------------------------------------------
-         * Count the binary systems.
-         * We go through all stars one by one and look at the is_binary
-         * flag: 1 = binary, 0 = single star.
-         * ------------------------------------------------------------ */
+        /* Print how many stars the file contains*/
 
-        /* Start counting at zero. */
+        printf("%s: %d entries\n", files[f], c.count);
+
+
+        /* Count how many binaries
+         * We go through all stars one by one and look at the is_binary
+         * flag: 1 = binary, 0 = single star */
+
         int binaries = 0;
 
         /* A for loop: i starts at 0, runs while i is smaller than the
@@ -89,10 +101,7 @@ int main (void)
                c.count, binaries);
 
 
-        /* ------------------------------------------------------------
-         * Print the first five entries as a check that the data was
-         * read correctly.
-         * ------------------------------------------------------------ */
+        /* Print the first five entries as a check that the data was read correctly.*/
 
         printf("\nFirst 5 entries:\n");
 
@@ -110,20 +119,11 @@ int main (void)
         }
 
 
-        /* ============================================================
-         * CLEANUP
-         * ============================================================ */
 
-        /* Free the memory reserved for the star list. Every read_*
-         *      function has a matching free_* function. Forgetting this
-         *      causes a memory leak. */
+        /* Free the memory before the next file */
+
+
         free_cluster(&c);
-
-        /* 0 = the program finished successfully. */
+        }
         return 0;
-
 }
-
-
-
-

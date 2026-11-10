@@ -14,7 +14,7 @@
  */
 
 
-// Include guard: Include guard: prevents this file from being processed twice. The first time, READER_H gets defined. The second time, the whole block is skipped.
+// Include guard: prevents this file from being processed twice. The first time, READER_H gets defined. The second time, the whole block is skipped.
 #ifndef READER_H
 #define READER_H
 
@@ -47,8 +47,8 @@ typedef struct {
 
 /* ------------------------------------------------------------
  * FUNCTION PROTOTYPES
- * The follwoing are the "signatures" of the functions: return type, name
- * and parameters. The body (the "how") is in reader.c.
+ * The following are the "signatures" of the functions: return type, name
+ * and parameters. The body (the "how") is in reader.c, here only the declaration.
  *
  * Why a prototype? main.c calls these functions. For the compiler
  * to check the calls (correct number and types of arguments), it
@@ -60,7 +60,7 @@ typedef struct {
  * ------------------------------------------------------------ */
 
 /* Reads the relation file into rel.
- path: file path as* text (const = not modified by the function)
+ path: file path as text (const = not modified by the function)
  rel:  pointer to a Relation that the function fills in */
 int read_relation(const char *path, Relation *rel);
 
@@ -70,7 +70,7 @@ int read_relation(const char *path, Relation *rel);
 int read_cluster(const char *path, Cluster *cluster);
 
 /* Frees the memory reserved with malloc.
- Every malloc needs* a matching free, otherwise there is a memory leak. */
+ Every malloc needs a matching free */
 void free_relation(Relation *rel);
 void free_cluster(Cluster *cluster);
 
